@@ -33,7 +33,7 @@ const displayPhone = (numbers) => {
                         <h5>${number.brand}</h5>
                     </div>
                     <div class='text-center my-2'>
-                    <button onclick="loadSingleData('${number.slug}')" type="button" class="btn btn-success ">Details</button>
+                    <button onclick="loadSingleData('${number.slug}')" type="button" class="btn btn-success px-4">Details</button>
                     </div>
                 </div>
             `;
@@ -62,12 +62,12 @@ const displaySingleData = (number) => {
                 <h4><span class='fw-bold'>Brand : </span>${number.brand}</h4>
                 <h6><span class='fw-bold'>Release Date : </span>${number.releaseDate||'release date not found'}</h6>
                 <p><span class='fw-bold'>Storage : </span>${number.mainFeatures.storage}</p>
-                <p><span class='fw-bold'>DisplaySize : </span>${number.mainFeatures.displaySize}</p>
+                <p><span class='fw-bold'>Display Size : </span>${number.mainFeatures.displaySize}</p>
                 <p><span class='fw-bold'>Chip Set : </span>${number.mainFeatures.chipSet}</p>
                 <p><span class='fw-bold'>Memory : </span>${number.mainFeatures.memory}</p>
                 <p><span class='fw-bold'>Sensors : </span>${number.mainFeatures.sensors}</p>
 
-                <p>${number.others? `<span class='fw-bold'>Bluetooth : </span>${number.others.Bluetooth}, ${number.others.GPS},${number.others.NFC}, ${number.others.Radio}, ${number.others.USB},${number.others.WLAN}` : 'Not found'}</p>
+                <p>${number.others? `<span class='fw-bold'>Bluetooth : </span>${number.others.Bluetooth},<span class='fw-bold'> GPS : </span> ${number.others.GPS}, <span class='fw-bold'> NFC : </span>${number.others.NFC}, <span class='fw-bold'> Radio : </span> ${number.others.Radio},<span class='fw-bold'> USB : </span> ${number.others.USB}, <span class='fw-bold'> WLAN : </span>${number.others.WLAN}` : 'Not found'}</p>
             
             </div>
         </div>`;
