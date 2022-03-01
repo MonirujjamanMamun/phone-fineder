@@ -5,3 +5,15 @@
 #empty-fild {
     display: none;
 }
+
+.color {
+    color: #5caceb;
+}
+
+.orange {
+    color: rgba(99, 58, 175, 0.876);
+}
+
+.red {
+    color: red;
+}

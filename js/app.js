@@ -1,31 +1,35 @@
 const loadData = () => {
-    const inputFild = document.getElementById("input-fild");
-    const inputValue = inputFild.value.toLowerCase();
-    inputFild.value = '';
-
-    if (inputValue === '') {
-        document.getElementById("empty-fild").style.display = 'block';
-    } else {
-        const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displayPhone(data.data.slice(0, 20)))
-        document.getElementById("empty-fild").style.display = 'none';
+        const inputFild = document.getElementById("input-fild");
+        const inputValue = inputFild.value.toLowerCase();
+        // clear input Fild 
+        inputFild.value = '';
+        // error handaling
+        if (inputValue === '') {
+            document.getElementById("empty-fild").style.display = 'block';
+        } else {
+            const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`
+            fetch(url)
+                .then(res => res.json())
+                .then(data => displayPhone(data.data.slice(0, 20)))
+                // empty fild error hide 
+            document.getElementById("empty-fild").style.display = 'none';
+        }
     }
-}
-
+    // all phone data 
 const displayPhone = (numbers) => {
-    const allPhone = document.getElementById("all-phone");
-    allPhone.textContent = '';
-    document.getElementById("single-phone").textContent = '';
-
-    if (numbers.length === 0) {
-        document.getElementById("error").style.display = 'block';
-    } else {
-        numbers.forEach(number => {
-            const div = document.createElement('div');
-            div.classList.add('col');
-            div.innerHTML = `
+        const allPhone = document.getElementById("all-phone");
+        // clear previous display all data
+        allPhone.textContent = '';
+        document.getElementById("single-phone").textContent = '';
+        // error handaling
+        if (numbers.length === 0) {
+            document.getElementById("error").style.display = 'block';
+        } else {
+            // display all phone data 
+            numbers.forEach(number => {
+                const div = document.createElement('div');
+                div.classList.add('col');
+                div.innerHTML = `
                 <div class="card">
                     <img src="${number.image}" class="card-img-top" alt="">
                     <div class="card-body text-center">
@@ -37,23 +41,23 @@ const displayPhone = (numbers) => {
                     </div>
                 </div>
             `;
-            allPhone.appendChild(div);
-        });
-
-        document.getElementById("error").style.display = 'none';
+                allPhone.appendChild(div);
+            });
+            // error proparte hide 
+            document.getElementById("error").style.display = 'none';
+        }
     }
-}
-
+    // get single data 
 const loadSingleData = (number) => {
-    const url = `https://openapi.programming-hero.com/api/phone/${number}`;
-    fetch(url)
-        .then(res => res.json())
-        .then(data => displaySingleData(data.data))
-}
-
+        const url = `https://openapi.programming-hero.com/api/phone/${number}`;
+        fetch(url)
+            .then(res => res.json())
+            .then(data => displaySingleData(data.data))
+    }
+    // display single data 
 const displaySingleData = (number) => {
-        // console.log(number)
         const singlePhone = document.getElementById("single-phone");
+        // all details display 
         singlePhone.innerHTML = `
         <div class="card">
             <img src="${number.image}" class="w-50 mx-auto mt-2" alt="">
