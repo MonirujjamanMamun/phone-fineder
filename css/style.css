@@ -14,6 +14,6 @@
     color: rgba(99, 58, 175, 0.876);
 }
 
-.red {
-    color: red;
+#spinner {
+    display: none;
 }

@@ -3,20 +3,31 @@ const loadData = () => {
         const inputValue = inputFild.value.toLowerCase();
         // clear input Fild 
         inputFild.value = '';
+        // spinner display 
+        document.getElementById('spinner').style.display = "block";
         // error handaling
         if (inputValue === '') {
             document.getElementById("empty-fild").style.display = 'block';
+            document.getElementById("error").style.display = 'none';
+            document.getElementById("all-phone").textContent = '';
+            document.getElementById("single-phone").textContent = '';
+            document.getElementById('spinner').style.display = "none";
+
         } else {
             const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`
             fetch(url)
                 .then(res => res.json())
                 .then(data => displayPhone(data.data.slice(0, 20)))
-                // empty fild error hide 
+
+            // empty fild error hide 
             document.getElementById("empty-fild").style.display = 'none';
+
         }
     }
     // all phone data 
 const displayPhone = (numbers) => {
+        // spinner hide 
+        document.getElementById('spinner').style.display = "none";
         const allPhone = document.getElementById("all-phone");
         // clear previous display all data
         allPhone.textContent = '';
@@ -24,6 +35,7 @@ const displayPhone = (numbers) => {
         // error handaling
         if (numbers.length === 0) {
             document.getElementById("error").style.display = 'block';
+            document.getElementById("empty-fild").style.display = 'none';
         } else {
             // display all phone data 
             numbers.forEach(number => {
@@ -40,7 +52,7 @@ const displayPhone = (numbers) => {
                     <button onclick="loadSingleData('${number.slug}')" type="button" class="btn btn-success px-4">Details</button>
                     </div>
                 </div>
-            `;
+                `;
                 allPhone.appendChild(div);
             });
             // error proparte hide 
@@ -49,12 +61,13 @@ const displayPhone = (numbers) => {
     }
     // get single data 
 const loadSingleData = (number) => {
-        const url = `https://openapi.programming-hero.com/api/phone/${number}`;
-        fetch(url)
-            .then(res => res.json())
-            .then(data => displaySingleData(data.data))
-    }
-    // display single data 
+    const url = `https://openapi.programming-hero.com/api/phone/${number}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => displaySingleData(data.data))
+}
+
+// display single data 
 const displaySingleData = (number) => {
         const singlePhone = document.getElementById("single-phone");
         // all details display 
